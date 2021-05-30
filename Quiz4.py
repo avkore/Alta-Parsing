@@ -2,6 +2,7 @@ import time
 from bs4 import BeautifulSoup
 import requests
 import sqlite3
+import random
 
 con = sqlite3.connect('Alta.sqlite')
 cursor = con.cursor()
@@ -16,7 +17,7 @@ i = 1
 while True:
     url = 'https://alta.ge/smartphones-page-{}.html'.format(i)
     request = requests.get(url)
-    time.sleep(15)
+    time.sleep(random.randint(8, 20))
     status_code = request.status_code
     i += 1
     if i == 7: break
@@ -44,6 +45,7 @@ while True:
 
             cursor.execute("INSERT INTO Data(Product_Name, Price) VALUES (?,?)", (product_name, price))
             con.commit()
+            con.close()
     else:
         print("cant connect to the server")
 
