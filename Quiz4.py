@@ -45,7 +45,8 @@ while True:
 
             cursor.execute("INSERT INTO Data(Product_Name, Price) VALUES (?,?)", (product_name, price))
             con.commit()
-            con.close()
+
     else:
         print("cant connect to the server")
 
+con.close()
